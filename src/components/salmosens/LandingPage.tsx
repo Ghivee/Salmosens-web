@@ -703,7 +703,7 @@ export default function LandingPage({ onNavigate, onScrollToSection }: LandingPa
                 iconBg: 'bg-sky-100',
                 iconColor: 'text-sky-500',
                 label: 'Total Pengujian Bulan Ini',
-                value: statsData ? statsData.totalThisMonth.toLocaleString('id-ID') : '—',
+                value: statsData && typeof statsData.totalThisMonth === 'number' ? statsData.totalThisMonth.toLocaleString('id-ID') : '—',
                 sublabel: 'pengujian selesai',
               },
               {
@@ -711,7 +711,7 @@ export default function LandingPage({ onNavigate, onScrollToSection }: LandingPa
                 iconBg: 'bg-amber-100',
                 iconColor: 'text-amber-500',
                 label: 'Tingkat Positif',
-                value: statsData ? `${statsData.positiveRate}%` : '—',
+                value: statsData && typeof statsData.positiveRate === 'number' ? `${statsData.positiveRate}%` : '—',
                 sublabel: 'terdeteksi Salmonella',
               },
               {
