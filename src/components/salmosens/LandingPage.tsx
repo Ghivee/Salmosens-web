@@ -143,16 +143,14 @@ export default function LandingPage({ onNavigate, onScrollToSection }: LandingPa
 
   useEffect(() => {
     fetch('/api/tests?variant=HOME')
-      .then((r) => r.json())
-      .then(setPublicTests)
+      .then(async (r) => { if (r.ok) setPublicTests(await r.json()); })
       .catch(() => {});
   }, []);
 
   // Fetch live stats
   useEffect(() => {
     fetch('/api/stats')
-      .then((r) => r.json())
-      .then((data) => setStatsData(data))
+      .then(async (r) => { if (r.ok) setStatsData(await r.json()); })
       .catch(() => {});
   }, []);
 

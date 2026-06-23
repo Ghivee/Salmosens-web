@@ -92,9 +92,11 @@ export default function Home() {
     setShowNotifications(true);
     try {
       const res = await fetch('/api/alerts');
-      const data = await res.json();
-      const recent = data.slice(0, 5);
-      setAlerts(recent);
+      if (res.ok) {
+        const data = await res.json();
+        const recent = data.slice(0, 5);
+        setAlerts(recent);
+      }
     } catch { /* silent */ }
   }, [showNotifications]);
 
