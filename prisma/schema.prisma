@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String       @id @default(cuid())
+  name      String
+  email     String       @unique
+  role      String       @default("HOME") // GOVERNMENT, PRO, HOME
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  tests     TestResult[]
+}
+
+model TestResult {
+  id             String   @id @default(cuid())
+  userId         String?
+  user           User?    @relation(fields: [userId], references: [id])
+  sampleType     String   // AYAM, TELUR, SUSU_MENTAH, DAGING_SAPI
+  cfuValue       Float
+  result         String   // POSITIF, NEGATIF
+  latitude       Float
+  longitude      Float
+  locationName   String
+  deviceBattery  Int?
+  variant        String   @default("HOME") // HOME, PRO
+  reported       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+}
+
+model Alert {
+  id          String   @id @default(cuid())
+  type        String   // OUTBREAK, WARNING, INFO
+  title       String
+  message     String
+  latitude    Float?
+  longitude   Float?
+  radiusKm    Float?
+  resolved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
