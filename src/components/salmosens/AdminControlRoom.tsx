@@ -469,7 +469,7 @@ export default function AdminControlRoom() {
                   {/* Center label */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                     <span className="text-lg font-bold text-white">
-                      {(stats.resultDistribution.POSITIF + stats.resultDistribution.NEGATIF).toLocaleString('id-ID')}
+                      {(stats?.resultDistribution ? stats.resultDistribution.POSITIF + stats.resultDistribution.NEGATIF : 0).toLocaleString('id-ID')}
                     </span>
                     <span className="text-[10px] text-gray-500">total</span>
                   </div>
